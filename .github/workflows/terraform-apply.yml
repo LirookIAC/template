@@ -5,16 +5,22 @@ on:
     workflows: ["Terraform Plan"]
     types:
       - completed
+
 jobs:
   terraform:
     name: 'Terraform Apply'
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        environment: [test, prod]
+
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_AD_CLIENT_SUBSCRIPTIONID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_AD_CLIENT_TENANTID }}
-    runs-on: ubuntu-latest
-    environment: production
+      TEST_ARM_SUBSCRIPTION_ID: ${{ secrets.TEST_AZURE_AD_CLIENT_SUBSCRIPTIONID }}
+      PROD_ARM_SUBSCRIPTION_ID: ${{ secrets.PROD_AZURE_AD_CLIENT_SUBSCRIPTIONID }}
 
     defaults:
       run:
@@ -24,6 +30,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Set Terraform environment variables
+      run: |
+        if [ "${{ matrix.environment }}" == "test" ]; then
+          echo "ARM_SUBSCRIPTION_ID=${{ secrets.TEST_AZURE_AD_CLIENT_SUBSCRIPTIONID }}" >> $GITHUB_ENV
+        elif [ "${{ matrix.environment }}" == "prod" ]; then
+          echo "ARM_SUBSCRIPTION_ID=${{ secrets.PROD_AZURE_AD_CLIENT_SUBSCRIPTIONID }}" >> $GITHUB_ENV
+        fi
+
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-actions@master
       with:
@@ -31,7 +45,7 @@ jobs:
         tf_actions_subcommand: 'init'
         tf_actions_working_dir: "."
 
-    - name: Terraform Apply
+    - name: 'Terraform Apply'
       if: github.ref == 'refs/heads/main'
       uses: hashicorp/terraform-github-actions@master
       with:
