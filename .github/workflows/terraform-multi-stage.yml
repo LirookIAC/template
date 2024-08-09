@@ -35,6 +35,7 @@ jobs:
         run: |
           chmod +x .github/workflows/scripts/terraform-with-backend.sh
           .github/workflows/scripts/terraform-with-backend.sh plan -var-file backend.tfvars -out=${{ env.TF_BACKEND_KEY }}
+          ls -al
 
 
       - name: Upload Terraform Plan as Artifact
