@@ -60,6 +60,7 @@ jobs:
           path: ${{ env.TF_BACKEND_KEY }}
 
   apply:
+    needs : plan
     runs-on: ubuntu-latest
     env:
       ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
