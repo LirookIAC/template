@@ -20,9 +20,9 @@ jobs:
         run: |
           # Source variables from backend.tfvars
           while IFS='=' read -r key value; do
-            key=$(echo $key | xargs)  # Remove leading/trailing spaces from key
-            value=$(echo $value | xargs)  # Remove leading/trailing spaces from value
-            value=$(echo $value | sed 's/^"//;s/"$//')  # Remove surrounding quotes from value
+            key=$(echo "$key" | xargs)  # Remove leading/trailing spaces from key
+            value=$(echo "$value" | xargs)  # Remove leading/trailing spaces from value
+            value=$(echo "$value" | sed 's/^"//;s/"$//')  # Remove surrounding quotes from value
             if [[ $key == "ApplicationName" ]]; then
               ApplicationName=$value
             elif [[ $key == "EnvironmentName" ]]; then
@@ -31,16 +31,16 @@ jobs:
           done < backend.tfvars
 
           # Debugging: Print variables to ensure they're set correctly
-          echo "ApplicationName=$ApplicationName"
-          echo "EnvironmentName=$EnvironmentName"
+          echo "ApplicationName=${ApplicationName}"
+          echo "EnvironmentName=${EnvironmentName}"
           
           # Export ApplicationName and EnvironmentName to GitHub Actions environment
-          echo "ApplicationName=$ApplicationName" >> $GITHUB_ENV
-          echo "EnvironmentName=$EnvironmentName" >> $GITHUB_ENV
+          echo "ApplicationName=${ApplicationName}" >> $GITHUB_ENV
+          echo "EnvironmentName=${EnvironmentName}" >> $GITHUB_ENV
           
           # Construct TF_BACKEND_KEY and export it to GitHub Actions environment
           TF_BACKEND_KEY="${ApplicationName}-${EnvironmentName}.tfplan"
-          echo "TF_BACKEND_KEY=$TF_BACKEND_KEY" >> $GITHUB_ENV
+          echo "TF_BACKEND_KEY=${TF_BACKEND_KEY}" >> $GITHUB_ENV
 
       - name: Terraform Validate
         run: |
