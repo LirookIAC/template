@@ -1,0 +1,87 @@
+name: Terraform Apply
+on:
+  workflow_dispatch:
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      BACKEND_RESOURCE_GROUP_NAME: ${{ secrets.BACKEND_RESOURCE_GROUP_NAME }}
+      BACKEND_STORAGE_ACCOUNT_NAME: ${{ secrets.BACKEND_STORAGE_ACCOUNT_NAME }}
+      BACKEND_STORAGE_CONTAINER_NAME: ${{ secrets.BACKEND_STORAGE_CONTAINER_NAME }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set environment variables and construct TF_BACKEND_KEY
+        run: |
+          # Source variables from backend.tfvars
+          eval $(awk -F '=' '{gsub(/"/, "", $2); print $1"="$2}' backend.tfvars)
+          # Export ApplicationName and EnvironmentName to GitHub Actions environment
+          echo "ApplicationName=$ApplicationName" >> $GITHUB_ENV
+          echo "EnvironmentName=$EnvironmentName" >> $GITHUB_ENV
+          # Construct TF_BACKEND_KEY and export it to GitHub Actions environment
+          TF_BACKEND_KEY="${ApplicationName}-${EnvironmentName}.tfplan"
+          echo "TF_BACKEND_KEY=$TF_BACKEND_KEY" >> $GITHUB_ENV
+
+
+      - name: Terraform Validate
+        run: |
+          chmod +x .github/workflows/scripts/terraform-with-backend.sh
+          .github/workflows/scripts/terraform-with-backend.sh validate
+
+      - name: Terraform Plan
+        run: |
+          chmod +x .github/workflows/scripts/terraform-with-backend.sh
+          .github/workflows/scripts/terraform-with-backend.sh plan -out "${{ env.TF_BACKEND_KEY }}"
+
+
+      - name: Upload Terraform Plan as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: tfplan
+          path: ${{ env.TF_BACKEND_KEY }}
+
+  apply:
+    runs-on: ubuntu-latest
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      BACKEND_RESOURCE_GROUP_NAME: ${{ secrets.BACKEND_RESOURCE_GROUP_NAME }}
+      BACKEND_STORAGE_ACCOUNT_NAME: ${{ secrets.BACKEND_STORAGE_ACCOUNT_NAME }}
+      BACKEND_STORAGE_CONTAINER_NAME: ${{ secrets.BACKEND_STORAGE_CONTAINER_NAME }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set environment variables and construct TF_BACKEND_KEY
+        run: |
+          # Source variables from backend.tfvars
+          eval $(awk -F '=' '{gsub(/"/, "", $2); print $1"="$2}' backend.tfvars)
+          # Export ApplicationName and EnvironmentName to GitHub Actions environment
+          echo "ApplicationName=$ApplicationName" >> $GITHUB_ENV
+          echo "EnvironmentName=$EnvironmentName" >> $GITHUB_ENV
+          # Construct TF_BACKEND_KEY and export it to GitHub Actions environment
+          TF_BACKEND_KEY="${ApplicationName}-${EnvironmentName}.tfplan"
+          echo "TF_BACKEND_KEY=$TF_BACKEND_KEY" >> $GITHUB_ENV
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: tfplan
+
+      - name: Terraform Validate
+        run: |
+          chmod +x .github/workflows/scripts/terraform-with-backend.sh
+          .github/workflows/scripts/terraform-with-backend.sh validate
+
+      - name: Terraform Apply
+        run: |
+          chmod +x .github/workflows/scripts/terraform-with-backend.sh
+          .github/workflows/scripts/terraform-with-backend.sh apply -auto-approve "${{ env.TF_BACKEND_KEY }}"
+
