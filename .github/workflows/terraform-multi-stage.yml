@@ -60,6 +60,7 @@ jobs:
           path: ${{ env.TF_BACKEND_KEY }}
 
   apply:
+    environment : production
     needs : plan
     runs-on: ubuntu-latest
     env:

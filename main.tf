@@ -1,4 +1,4 @@
 resource azurerm_resource_group "main" {
-  name     = "${ApplicationName}-${EnvironmentName}"
+  name     = "${var.ApplicationName}-${var.EnvironmentName}"
   location = "West Europe"
 }
