@@ -88,6 +88,6 @@ jobs:
       - name: Terraform Apply
         working-directory: src/terraform
         run: |
-          chmod +x ../.github/workflows/scripts/terraform-with-backend.sh
+          chmod +x ../../.github/workflows/scripts/terraform-with-backend.sh
           ../../.github/workflows/scripts/terraform-with-backend.sh apply -auto-approve "${{ env.TF_BACKEND_KEY }}"
 
