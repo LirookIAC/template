@@ -3,6 +3,9 @@
 ## Overview
 
 This repository contains a CI/CD template for managing Terraform deployments in Azure using GitHub Actions. It includes workflows for validating, planning, and applying Terraform configurations. The setup ensures that Terraform changes are applied systematically and consistently through automated processes.
+For a visual demonstration of the setup and configuration, you can watch the following video:
+[Usage Demonstration and Setup Video](https://youtu.be/2bq8RmuXekY)
+
 
 ## Key Workflow Components:
 
@@ -115,9 +118,5 @@ With these prerequisites met, you can start using the CI/CD template to manage y
 
 This template provides a starting point for setting up a Terraform CI/CD pipeline with GitHub Actions. You can further customize and modify this template to fit your organization's specific needs and policies. Adjust the workflows, variables, and configurations as necessary to align with your infrastructure and operational requirements.
 
-For a visual demonstration of the setup and configuration, you can watch the following video:
 
-[Watch the video on YouTube](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
-
-Replace `YOUR_VIDEO_ID` with the actual ID of your YouTube video. This video provides a step-by-step guide to help you understand the process more clearly.
 
