@@ -63,7 +63,8 @@ Before using this CI/CD template, ensure you have the below credentials set up a
    - EnvironmentName = "dev".
    - So the resulting backend file will be : `LirookIAC-dev.tfplan`
 
+4.  **Versions file **: Ensure that your `src/teraform/versions.tf` has required versions and providers set up.
 
-6. **Terraform Configuration**: Ensure that your Terraform configuration files are correctly set up and located in the `src/terraform` directory. This setup includes your Terraform files, variable files, and any necessary modules or resources.
+6.  **Terraform Configuration**: Ensure that your Terraform configuration files are correctly set up and located in the `src/terraform` directory. This setup includes your Terraform files, variable files, and any necessary modules or resources.
 
 With these prerequisites met, you can start using the CI/CD template to manage your Terraform deployments in Azure effectively.
