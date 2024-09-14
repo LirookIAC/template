@@ -92,12 +92,26 @@ With these prerequisites met, you can start using the CI/CD template to manage y
 4. **Ensure pre-requisites**
    - Ensure all GitHub and Azure Pre-requisites are met outlined in above sections.
 
-###  Set Up the New Repository
 
-1. **Clone the Repository Locally**
+5. **Clone the Repository Locally**
    - Once the new repository is created, clone it to your local machine using the following command:
 
    ```sh
    git clone https://github.com/<your-username>/<your-new-repo>.git
    cd <your-new-repo>
    ```
+## 3. Configure and Run GitHub Actions
+
+1. **Push Changes to GitHub**
+   - After making necessary updates to Terraform configurations and backend settings, commit and push your changes to the repository.
+
+2. **Trigger the Workflow**
+   - Go to the **Actions** tab in your new repository on GitHub.
+   - You should see the workflow named "Terraform Apply" or similar. Click on it to view the workflow runs.
+   - Manually trigger the workflow by clicking the **"Run workflow"** button if necessary.
+
+3. **Monitor Workflow Execution**
+   - Monitor the progress and results of the GitHub Actions workflow. You can view logs for each step of the workflow to ensure that the Terraform operations are executed correctly.
+
+This template provides a starting point for setting up a Terraform CI/CD pipeline with GitHub Actions. You can further customize and modify this template to fit your organization's specific needs and policies. Adjust the workflows, variables, and configurations as necessary to align with your infrastructure and operational requirements.
+
