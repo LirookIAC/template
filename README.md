@@ -67,7 +67,7 @@ Before using this CI/CD template, ensure you have the below credentials set up a
 
 6.  **Terraform Configuration**: Ensure that your Terraform configuration files are correctly set up and located in the `src/terraform` directory. This setup includes your Terraform files, variable files, and any necessary modules or resources.
    
-7.  **Environment Protection Rules** : Make sure you have prod and dev environment set up in github repository. Add approvers to prod if needed. Plan runs on dev environment while the apply step runs on prod.
+7.  **Environment Protection Rules** : Make sure you have `prod` and `dev` environment set up in github repository. Add approvers to prod if needed. Plan runs on `dev` environment while the apply step runs on `prod`.
 
 With these prerequisites met, you can start using the CI/CD template to manage your Terraform deployments in Azure effectively.
 
