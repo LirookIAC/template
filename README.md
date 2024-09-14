@@ -70,9 +70,9 @@ Before using this CI/CD template, ensure you have the below credentials set up a
 With these prerequisites met, you can start using the CI/CD template to manage your Terraform deployments in Azure effectively.
 
 
-# Creating a New Repository from Template and Using It
+## Creating a New Repository from Template and Using It
 
-## 1. Create a New Repository from the Template
+#  Create a New Repository from the Template
 
 1. **Navigate to the Template Repository**
    - Go to the GitHub page of the repository.
@@ -90,7 +90,7 @@ With these prerequisites met, you can start using the CI/CD template to manage y
 4. **Ensure pre-requisites**
    - Ensure all GitHub and Azure Pre-requisites are met outlined in above sections.
 
-## 2. Set Up the New Repository
+#  Set Up the New Repository
 
 1. **Clone the Repository Locally**
    - Once the new repository is created, clone it to your local machine using the following command:
