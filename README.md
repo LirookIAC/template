@@ -68,3 +68,34 @@ Before using this CI/CD template, ensure you have the below credentials set up a
 6.  **Terraform Configuration**: Ensure that your Terraform configuration files are correctly set up and located in the `src/terraform` directory. This setup includes your Terraform files, variable files, and any necessary modules or resources.
 
 With these prerequisites met, you can start using the CI/CD template to manage your Terraform deployments in Azure effectively.
+
+
+# Creating a New Repository from Template and Using It
+
+## 1. Create a New Repository from the Template
+
+1. **Navigate to the Template Repository**
+   - Go to the GitHub page of the repository.
+
+2. **Create a New Repository**
+   - Click on the **"Use this template"** button, usually found on the right side of the repository page.
+   - You will be redirected to a new page where you can create a new repository based on the template.
+
+3. **Configure the New Repository**
+   - **Repository Name**: Enter a name for your new repository.
+   - **Description** (optional): Provide a description for your new repository.
+   - **Visibility**: Choose whether the repository should be **Public** or **Private**.
+   - Click **"Create repository from template"** to create the new repository.
+  
+4. **Ensure pre-requisites**
+   - Ensure all GitHub and Azure Pre-requisites are met outlined in above sections.
+
+## 2. Set Up the New Repository
+
+1. **Clone the Repository Locally**
+   - Once the new repository is created, clone it to your local machine using the following command:
+
+   ```sh
+   git clone https://github.com/<your-username>/<your-new-repo>.git
+   cd <your-new-repo>
+   ```
