@@ -59,9 +59,9 @@ Before using this CI/CD template, ensure you have the below credentials set up a
    - `BACKEND_STORAGE_CONTAINER_NAME`: The name of the container within the Azure Storage account used for Terraform state files.
 
 3. **Terraform backend file**: Ensure that you have a `backend.tfvars` file in `src/terraform` directory. Ensure below two values are set. This will ensure that backend file is named as per application and environment. Example file : 
-   -ApplicationName = "LirookIAC"
-   -EnvironmentName = "dev"
-   So the resulting backend file will be : `LirookIAC-dev.tfplan`
+   - ApplicationName = "LirookIAC".
+   - EnvironmentName = "dev".
+   - So the resulting backend file will be : `LirookIAC-dev.tfplan`
 
 
 6. **Terraform Configuration**: Ensure that your Terraform configuration files are correctly set up and located in the `src/terraform` directory. This setup includes your Terraform files, variable files, and any necessary modules or resources.
