@@ -4,7 +4,7 @@
 
 This repository contains a CI/CD template for managing Terraform deployments in Azure using GitHub Actions. It includes workflows for validating, planning, and applying Terraform configurations. The setup ensures that Terraform changes are applied systematically and consistently through automated processes.
 
-### Key Workflow Components:
+## Key Workflow Components:
 
 1. **Terraform Validate**: Checks the syntax and integrity of the Terraform configuration files.
 2. **Terraform Plan**: Creates an execution plan for Terraform, which details the changes that will be made.
@@ -12,7 +12,7 @@ This repository contains a CI/CD template for managing Terraform deployments in 
 
 The template uses GitHub Actions to automate these tasks, making it easier to integrate Terraform with your development and deployment pipelines.
 
-### Azure-side Prerequisites
+## Azure-side Prerequisites
 Before using this template you will need to have below pre-requisites in place form Azure side.
 
 1. **Azure Service Principal**:
