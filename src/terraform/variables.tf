@@ -5,7 +5,3 @@ variable "ApplicationName" {
 variable "EnvironmentName" {
   type = string
 }
-
-variable "est" {
-  type = string
-}
